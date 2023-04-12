@@ -1,4 +1,4 @@
-import { Feature, Loading, Preview, Search, Title } from './components';
+import { Feature, Footer, Loading, Preview, Search, Title } from './components';
 import { useAppSelector } from './app/hooks';
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
         <Title />
         <Search />
         <Preview />
+        <Footer />
         {isLoading && <Loading />}
       </div>
       <Feature />
