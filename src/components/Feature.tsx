@@ -1,17 +1,29 @@
 import Searchable from './Searchable';
-import { useAppSelector } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { setFeaturedResult } from '../app/featuredResultSlice';
 
 const Feature = () => {
   const featuredResult = useAppSelector((state) => state.featuredResult.record);
+  const dispatch = useAppDispatch();
 
   return (
-    <div id='feature'>
+    <div id='feature' className={featuredResult ? 'active' : ''}>
       {featuredResult && (
         <div className='object-feature'>
           <header>
-            <h3>{featuredResult.title}</h3>
-            <h4>{featuredResult.dated}</h4>
+            <h1>{featuredResult.title}</h1>
+            <h2>{featuredResult.dated}</h2>
           </header>
+          <section className='photos'>
+            {featuredResult.images &&
+              featuredResult.images!.map((image, index) => (
+                <img
+                  src={image.baseimageurl}
+                  alt={image.copyright}
+                  key={index}
+                />
+              ))}
+          </section>
           <section className='facts'>
             <span className='title'>Culture</span>
             <Searchable
@@ -47,16 +59,9 @@ const Feature = () => {
             <span className='title'>Credit</span>
             <span className='content'>{featuredResult.creditline}</span>
           </section>
-          <section className='photos'>
-            {featuredResult.images &&
-              featuredResult.images!.map((image, index) => (
-                <img
-                  src={image.baseimageurl}
-                  alt={image.copyright}
-                  key={index}
-                />
-              ))}
-          </section>
+          <button onClick={() => dispatch(setFeaturedResult(null))}>
+            Close
+          </button>
         </div>
       )}
     </div>

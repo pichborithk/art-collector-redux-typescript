@@ -35,8 +35,13 @@ const Preview = () => {
                 dispatch(setFeaturedResult(record));
               }}
             >
-              {record.primaryimageurl && (
+              {record.primaryimageurl ? (
                 <img src={record.primaryimageurl} alt={record.description} />
+              ) : (
+                <img
+                  src='https://placehold.co/240x320'
+                  alt={record.description}
+                />
               )}
               {record.title ? <h3>{record.title}</h3> : <h3>MISSING INFO</h3>}
             </div>
