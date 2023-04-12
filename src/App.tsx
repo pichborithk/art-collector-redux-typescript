@@ -6,11 +6,13 @@ function App() {
 
   return (
     <>
-      <Title />
-      <Search />
-      <Preview />
+      <div id='app'>
+        <Title />
+        <Search />
+        <Preview />
+        {isLoading && <Loading />}
+      </div>
       <Feature />
-      {isLoading && <Loading />}
     </>
   );
 }

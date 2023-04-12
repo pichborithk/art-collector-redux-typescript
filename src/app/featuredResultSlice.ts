@@ -13,7 +13,7 @@ const featuredResultSlice = createSlice({
   name: 'featured',
   initialState,
   reducers: {
-    setFeaturedResult(state, action: PayloadAction<Record>) {
+    setFeaturedResult(state, action: PayloadAction<Record | null>) {
       state.record = action.payload;
     },
   },
