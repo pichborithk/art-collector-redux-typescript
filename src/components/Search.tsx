@@ -16,6 +16,7 @@ const Search = () => {
   const dispatch = useAppDispatch();
 
   const [isSearching, setIsSearching] = useState(false);
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const [tempResults, setTempResults] = useState<Record[]>([]);
   const [queryString, setQueryString] = useState('');
 
@@ -55,6 +56,7 @@ const Search = () => {
       console.error(error);
     } finally {
       setIsSearching(false);
+      setIsFiltersOpen(false);
     }
   }
 
@@ -91,6 +93,7 @@ const Search = () => {
             />
             <i className='fa-solid fa-magnifying-glass'></i>
           </label>
+
           {tempResults.length > 0 && isSearching && (
             <ul>
               {tempResults.map((record, index) => (
@@ -110,68 +113,82 @@ const Search = () => {
         </fieldset>
       </div>
       <div>
-        <fieldset>
-          <label htmlFor='select-culture'>
-            Culture
-            <span className='culture-count'>({cultureList.length})</span>
-          </label>
-          <select
-            name='culture'
-            id='select-culture'
-            value={culture}
-            onChange={(event) => {
-              setCulture(event.target.value);
-            }}
-          >
-            <option value='any'>Any</option>
-            {cultureList.map((c) => (
-              <option value={c.name} key={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-        </fieldset>
-        <fieldset>
-          <label htmlFor='select-classification'>
-            Classification
-            <span className='classification-count'>
-              ({classificationList.length})
-            </span>
-          </label>
-          <select
-            name='classification'
-            id='select-classification'
-            value={classification}
-            onChange={(event) => {
-              setClassification(event.target.value);
-            }}
-          >
-            <option value='any'>Any</option>
-            {classificationList.map((c) => (
-              <option value={c.name} key={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-        </fieldset>
-        <fieldset>
-          <label htmlFor='select-century'>
-            Century<span className='century-count'>({centuryList.length})</span>
-          </label>
-          <select
-            name='century'
-            id='select-century'
-            value={century}
-            onChange={(event) => setCentury(event.target.value)}
-          >
-            <option value='any'>Any</option>
-            {centuryList.map((c) => (
-              <option key={c.id} value={c.name}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-        </fieldset>
+        <p>
+          Filters
+          <i
+            className={
+              isFiltersOpen
+                ? 'fa-solid fa-chevron-down active'
+                : 'fa-solid fa-chevron-down'
+            }
+            onClick={() => setIsFiltersOpen(!isFiltersOpen)}
+          ></i>
+        </p>
+        <div className={isFiltersOpen ? 'filters active' : 'filters'}>
+          <fieldset>
+            <label htmlFor='select-century'>
+              Century
+              <span className='century-count'>({centuryList.length})</span>
+            </label>
+            <select
+              name='century'
+              id='select-century'
+              value={century}
+              onChange={(event) => setCentury(event.target.value)}
+            >
+              <option value='any'>Any</option>
+              {centuryList.map((c) => (
+                <option key={c.id} value={c.name}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </fieldset>
+          <fieldset>
+            <label htmlFor='select-classification'>
+              Classification
+              <span className='classification-count'>
+                ({classificationList.length})
+              </span>
+            </label>
+            <select
+              name='classification'
+              id='select-classification'
+              value={classification}
+              onChange={(event) => {
+                setClassification(event.target.value);
+              }}
+            >
+              <option value='any'>Any</option>
+              {classificationList.map((c) => (
+                <option value={c.name} key={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </fieldset>
+          <fieldset>
+            <label htmlFor='select-culture'>
+              Culture
+              <span className='culture-count'>({cultureList.length})</span>
+            </label>
+            <select
+              name='culture'
+              id='select-culture'
+              value={culture}
+              onChange={(event) => {
+                setCulture(event.target.value);
+              }}
+            >
+              <option value='any'>Any</option>
+              {cultureList.map((c) => (
+                <option value={c.name} key={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </fieldset>
+        </div>
         <button>SEARCH</button>
       </div>
     </form>
