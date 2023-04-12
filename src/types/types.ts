@@ -6,6 +6,8 @@ export type SearchResults = {
 export type Info = {
   next?: string;
   prev?: string;
+  totalrecordsperquery?: number;
+  totalrecords?: number;
 };
 
 export type Record = {
