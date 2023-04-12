@@ -7,8 +7,8 @@ const Preview = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <aside id='preview'>
-      <header className='pagination'>
+    <main id='preview'>
+      <nav className='pagination'>
         <button
           disabled={!searchResult.info.prev && true}
           className='previous'
@@ -23,7 +23,7 @@ const Preview = () => {
         >
           Next
         </button>
-      </header>
+      </nav>
       <section className='results'>
         {searchResult.records.map((record, index) => {
           return (
@@ -43,7 +43,7 @@ const Preview = () => {
           );
         })}
       </section>
-    </aside>
+    </main>
   );
 };
 

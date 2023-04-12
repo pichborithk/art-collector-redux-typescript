@@ -5,7 +5,7 @@ const Feature = () => {
   const featuredResult = useAppSelector((state) => state.featuredResult.record);
 
   return (
-    <main id='feature'>
+    <div id='feature'>
       {featuredResult && (
         <div className='object-feature'>
           <header>
@@ -59,7 +59,7 @@ const Feature = () => {
           </section>
         </div>
       )}
-    </main>
+    </div>
   );
 };
 
