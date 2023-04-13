@@ -58,7 +58,7 @@ export async function fetchQueryResults(
 ): Promise<SearchResults> {
   const { century, classification, culture, queryString } = searchObj;
 
-  const url = `${BASE_URL}/object?${KEY}&classification=${classification}&century=${century}&culture=${culture}&keyword=${queryString}`;
+  const url = `${BASE_URL}/object?${KEY}&classification=${classification}&century=${century}&culture=${culture}&keyword=${queryString}&size=12`;
 
   const response = await fetch(url);
   const data = await response.json();
