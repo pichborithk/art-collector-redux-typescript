@@ -80,7 +80,9 @@ export async function fetchQueryResultsFromTermAndValue({
   value,
 }: FetchQueryResultsFromTermAndValueArgs): Promise<SearchResults> {
   const response = await fetch(
-    `${BASE_URL}/object?${KEY}&${term}=${encodeURI(value.split('-').join('|'))}`
+    `${BASE_URL}/object?${KEY}&${term}=${encodeURI(
+      value.split('-').join('|')
+    )}&size=12`
   );
   const data = await response.json();
 
