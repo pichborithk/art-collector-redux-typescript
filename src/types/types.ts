@@ -64,6 +64,8 @@ export type SelectProps = {
 };
 
 export type SearchProps = {
-  tempResults: Record[];
-  setTempResults: Dispatch<SetStateAction<Record[]>>;
+  isSearching: boolean;
+  setIsSearching: Dispatch<SetStateAction<boolean>>;
+  isFiltersOpen: boolean;
+  setIsFiltersOpen: Dispatch<SetStateAction<boolean>>;
 };

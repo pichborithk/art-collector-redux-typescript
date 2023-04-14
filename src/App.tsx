@@ -5,13 +5,26 @@ import { Record } from './types/types';
 
 function App() {
   const isLoading = useAppSelector((state) => state.searchResult.loading);
-  const [tempResults, setTempResults] = useState<Record[]>([]);
+
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
 
   return (
     <>
-      <div id='app' onClick={() => setTempResults([])}>
+      <div
+        id='app'
+        onClick={() => {
+          setIsFiltersOpen(false);
+          setIsSearching(false);
+        }}
+      >
         <Title />
-        <Search tempResults={tempResults} setTempResults={setTempResults} />
+        <Search
+          isSearching={isSearching}
+          setIsSearching={setIsSearching}
+          isFiltersOpen={isFiltersOpen}
+          setIsFiltersOpen={setIsFiltersOpen}
+        />
         <Preview />
         <Footer />
         {isLoading && <Loading />}
