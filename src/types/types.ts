@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export type SearchResults = {
   info: Info;
   records: Record[];
@@ -52,4 +54,11 @@ export type FetchQueryResultsFromTermAndValueArgs = {
 export type SearchableProps = {
   searchTerm: string;
   searchValue: string;
+};
+
+export type SelectProps = {
+  name: string;
+  category: string;
+  setCategory: Dispatch<SetStateAction<string>>;
+  categoryList: Option[];
 };
