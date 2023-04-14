@@ -7,18 +7,22 @@ import {
   fetchQueryResults,
 } from '../api';
 
-import { Option, SearchProps } from '../types/types';
+import { Option, Record, SearchProps } from '../types/types';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchSearch } from '../app/searchResultSlice';
 import { setFeaturedResult } from '../app/featuredResultSlice';
 import Select from './Select';
 
-const Search = ({ tempResults, setTempResults }: SearchProps) => {
+const Search = ({
+  isSearching,
+  setIsSearching,
+  isFiltersOpen,
+  setIsFiltersOpen,
+}: SearchProps) => {
   const searchInfo = useAppSelector((state) => state.searchResult.result.info);
   const dispatch = useAppDispatch();
 
-  const [isSearching, setIsSearching] = useState(false);
-  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [tempResults, setTempResults] = useState<Record[]>([]);
   const [queryString, setQueryString] = useState('');
 
   const [culture, setCulture] = useState('any');
@@ -55,9 +59,6 @@ const Search = ({ tempResults, setTempResults }: SearchProps) => {
       dispatch(fetchSearch(searchObj));
     } catch (error) {
       console.error(error);
-    } finally {
-      setIsSearching(false);
-      setIsFiltersOpen(false);
     }
   }
 
@@ -102,7 +103,6 @@ const Search = ({ tempResults, setTempResults }: SearchProps) => {
                   onClick={() => {
                     setQueryString(record.title);
                     dispatch(setFeaturedResult(record));
-                    setIsSearching(false);
                   }}
                 >
                   {record.title}
@@ -121,10 +121,16 @@ const Search = ({ tempResults, setTempResults }: SearchProps) => {
                 ? 'fa-solid fa-chevron-down active'
                 : 'fa-solid fa-chevron-down'
             }
-            onClick={() => setIsFiltersOpen(!isFiltersOpen)}
+            onClick={(event) => {
+              event.stopPropagation();
+              setIsFiltersOpen(!isFiltersOpen);
+            }}
           ></i>
         </p>
-        <div className={isFiltersOpen ? 'filters active' : 'filters'}>
+        <div
+          className={isFiltersOpen ? 'filters active' : 'filters'}
+          onClick={(event) => event.stopPropagation()}
+        >
           <Select
             name='Century'
             category={century}
