@@ -318,6 +318,10 @@
 
       cursor: pointer;
 
+      &:hover {
+        transform: translate(1%, -2%);
+      }
+
       img {
         width: 100%;
         border-radius: 10px;
