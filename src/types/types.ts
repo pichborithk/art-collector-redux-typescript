@@ -62,3 +62,8 @@ export type SelectProps = {
   setCategory: Dispatch<SetStateAction<string>>;
   categoryList: Option[];
 };
+
+export type SearchProps = {
+  tempResults: Record[];
+  setTempResults: Dispatch<SetStateAction<Record[]>>;
+};

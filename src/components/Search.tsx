@@ -7,19 +7,18 @@ import {
   fetchQueryResults,
 } from '../api';
 
-import { Option, Record } from '../types/types';
+import { Option, SearchProps } from '../types/types';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchSearch } from '../app/searchResultSlice';
 import { setFeaturedResult } from '../app/featuredResultSlice';
 import Select from './Select';
 
-const Search = () => {
+const Search = ({ tempResults, setTempResults }: SearchProps) => {
   const searchInfo = useAppSelector((state) => state.searchResult.result.info);
   const dispatch = useAppDispatch();
 
   const [isSearching, setIsSearching] = useState(false);
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-  const [tempResults, setTempResults] = useState<Record[]>([]);
   const [queryString, setQueryString] = useState('');
 
   const [culture, setCulture] = useState('any');
