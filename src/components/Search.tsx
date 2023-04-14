@@ -13,12 +13,9 @@ import { fetchSearch } from '../app/searchResultSlice';
 import { setFeaturedResult } from '../app/featuredResultSlice';
 import Select from './Select';
 
-const Search = ({
-  isSearching,
-  setIsSearching,
-  isFiltersOpen,
-  setIsFiltersOpen,
-}: SearchProps) => {
+const Search = (props: SearchProps) => {
+  const { isSearching, setIsSearching, isFiltersOpen, setIsFiltersOpen } =
+    props;
   const searchInfo = useAppSelector((state) => state.searchResult.result.info);
   const dispatch = useAppDispatch();
 
