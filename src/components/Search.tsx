@@ -146,6 +146,16 @@ const Search = (props: SearchProps) => {
             setCategory={setCulture}
             categoryList={cultureList}
           />
+          <button
+            type='button'
+            onClick={() => {
+              setCentury('any');
+              setClassification('any');
+              setCulture('any');
+            }}
+          >
+            Reset
+          </button>
         </div>
         {searchInfo.totalrecords && (
           <span>
